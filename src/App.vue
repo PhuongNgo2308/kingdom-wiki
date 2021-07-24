@@ -1,47 +1,10 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      app
-      v-model="drawer"
-      :mini-variant.sync="mini"
-      permanent
-      right
-    >
-      <v-list-item class="px-2">
-        <v-list-item-avatar>
-          <v-img src="@/assets/logo.svg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Phuong Ngo</v-list-item-title>
-          <v-list-item-subtitle>Log out</v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-btn icon @click.stop="mini = !mini">
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <AppBar :links="topLinks" />
-
+    <AppBar @e_toggleNavDrawer="m_togglerDrawer"></AppBar>
+    <NavDrawer :showDrawer="d_showDrawer"></NavDrawer>
     <v-main>
-      <v-container>
-        <v-sheet min-height="70vh" rounded="lg">
-          <router-view />
-        </v-sheet>
+      <v-container class="main-container">
+        <router-view />
       </v-container>
     </v-main>
 
@@ -51,43 +14,39 @@
 
 <script lang="ts">
 import Vue from "vue";
-import AppBar, { AppBarLinkModel } from "@/layout/AppBar.vue";
+import NavDrawer from "@/layout/NavDrawer.vue";
+import AppBar from "@/layout/AppBar.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
+    NavDrawer,
     AppBar,
   },
   data: () => ({
-    topLinks: [
-      {
-        url: "/news",
-        text: "Tin tức",
-        icon: "",
-      },
-      {
-        url: "/discussion",
-        text: "Thảo luận",
-        icon: "",
-      },
-      {
-        url: "/library",
-        text: "Thư viện",
-        icon: "",
-      },
-    ] as AppBarLinkModel[],
-    drawer: true,
-    items: [
-      { title: "Activities", icon: "mdi-bell-outline" },
-      { title: "Account Settings", icon: "mdi-cog-outline" },
-    ],
-    mini: true,
-    isLogin: false,
+    d_showDrawer: false as boolean,
   }),
+  mounted() {
+    console.log(`mounted`);
+  },
+  methods: {
+    m_togglerDrawer: function() {
+      this.d_showDrawer = !this.d_showDrawer;
+    },
+  },
 });
 </script>
 
 <style lang="sass">
 html
-  overflow-y: auto !important
+  overflow-y: hidden !important
+
+.ql-container
+  font-family: $body-font-family !important
+
+.ql-toolbar *
+  font-family: $body-font-family !important
+
+.main-container
+  overflow-y: auto
 </style>

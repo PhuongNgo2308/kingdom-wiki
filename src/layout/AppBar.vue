@@ -1,22 +1,11 @@
 <template>
-  <v-app-bar app flat>
-    <v-container class="py-0 fill-height">
-      <v-btn v-for="link in links" :key="link" text>
-        {{ link.text }}
-      </v-btn>
-
-      <!-- <v-spacer></v-spacer>
-
-      <v-responsive max-width="260">
-        <v-text-field
-          dense
-          flat
-          hide-details
-          rounded
-          solo-inverted
-        ></v-text-field>
-      </v-responsive> -->
-    </v-container>
+  <v-app-bar app>
+    <v-app-bar-nav-icon @click.stop="m_onClickNavIcon"></v-app-bar-nav-icon>
+    <v-toolbar-title router to="/">Kingdom Story Wiki</v-toolbar-title>
+    <!-- <v-spacer></v-spacer>
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn> -->
   </v-app-bar>
 </template>
 
@@ -40,5 +29,10 @@ export default Vue.extend({
     } as PropOptions<AppBarLinkModel[]>,
   },
   data: () => ({}),
+  methods: {
+    m_onClickNavIcon: function() {
+      this.$emit("e_toggleNavDrawer");
+    },
+  },
 });
 </script>

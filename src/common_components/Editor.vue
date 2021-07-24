@@ -4,29 +4,25 @@
       <v-col class="mb-4">
         <VueEditor
           id="editor1"
-          class="text-editor"
           v-model="d_inputContent"
           :editorOptions="d_editorOptions"
+          :editorToolbar="d_editorToolbars"
         ></VueEditor>
       </v-col>
     </v-row>
-    <ViewModeEditor exId="intro" :content="d_inputContent"></ViewModeEditor>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { VueEditor } from "vue2-editor";
-import ViewModeEditor from "@/common_components/ViewModeEditor.vue";
 
 export default Vue.extend({
-  name: "Intro",
+  name: "Editor",
   components: {
     VueEditor,
-    ViewModeEditor,
   },
   data: () => ({
-    d_id: "" as string,
     d_inputContent: "" as string,
     d_editorOptions: {
       placeholder: "Compose an epic...",
@@ -47,8 +43,9 @@ export default Vue.extend({
       // ["blockquote", "code-block"],
     ] as any[],
   }),
-  mounted() {
-    this.d_id = "mounted";
+  computed: {
+    c_id: function() {},
   },
+  // mounted() {},
 });
 </script>
