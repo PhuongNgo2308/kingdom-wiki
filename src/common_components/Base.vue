@@ -4,18 +4,24 @@ import Vue from "vue";
 // contain the shared props and stuffs
 export default Vue.extend({
   name: "Base",
+  data() {
+    return {
+      d_componentId: this.$options.name?.toLowerCase(),
+    };
+  },
   props: {
     exId: {
       type: String,
-      required: true,
-      default: (): string => {
+      // required: true,
+      default(): string {
         return "";
       },
     },
   },
   computed: {
-    c_id: function() {
-      return `${this.exId}--component-name`;
+    // used for components id, indicate the recursive calling, ex: parentpage--child-component
+    c_combinedId(): string {
+      return `${this.exId?.toLowerCase() || "root"}--${this.d_componentId}`;
     },
   },
 });

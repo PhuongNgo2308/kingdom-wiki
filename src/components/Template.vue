@@ -5,36 +5,46 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
 import Base from "@/common_components/Base.vue";
+
+interface TemplateModel {
+  title: string;
+}
 
 export default Vue.extend({
   name: "Template",
   extends: Base,
   components: {},
   props: {
-    exId: {
-      type: String,
+    name: String,
+    success: { type: String },
+    callback: {
+      type: Function as PropType<() => void>,
+    },
+    message: {
+      type: Object as PropType<TemplateModel>,
       required: true,
-      default: (): string => {
-        return "";
+      validator(message: TemplateModel) {
+        return !!message.title;
       },
     },
   },
-  data: () => ({
-    d_inputContent: "" as string,
-    d_string: "" as string,
-    d_array: [] as any[],
-  }),
-  mounted() {},
-  computed: {
-    c_id: function() {
-      return `${this.exId}--component-name`;
+  data() {
+    return {
+      msg: "Base",
+    };
+  },
+  methods: {
+    // need annotation due to `this` in return type
+    greet(): string {
+      return this.msg + " world";
     },
   },
-  watch: {
-    content: function(newVal) {
-      this.d_inputContent = newVal;
+  computed: {
+    // need annotation
+    greeting(): string {
+      return this.greet() + "!";
     },
   },
 });

@@ -3,7 +3,7 @@
     <AppBar @e_toggleNavDrawer="m_togglerDrawer"></AppBar>
     <NavDrawer :showDrawer="d_showDrawer"></NavDrawer>
     <v-main>
-      <v-container class="main-container">
+      <v-container>
         <router-view />
       </v-container>
     </v-main>
@@ -23,14 +23,16 @@ export default Vue.extend({
     NavDrawer,
     AppBar,
   },
-  data: () => ({
-    d_showDrawer: false as boolean,
-  }),
-  mounted() {
+  data() {
+    return {
+      d_showDrawer: false as boolean,
+    };
+  },
+  mounted(): void {
     console.log(`mounted`);
   },
   methods: {
-    m_togglerDrawer: function() {
+    m_togglerDrawer(): void {
       this.d_showDrawer = !this.d_showDrawer;
     },
   },
@@ -46,7 +48,4 @@ html
 
 .ql-toolbar *
   font-family: $body-font-family !important
-
-.main-container
-  overflow-y: auto
 </style>

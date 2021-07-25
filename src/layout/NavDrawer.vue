@@ -1,7 +1,7 @@
 <template>
-  <v-navigation-drawer app v-model="d_showDrawer">
+  <v-navigation-drawer app v-model="d_showDrawer" id="nav-drawer">
     <v-list dense>
-      <v-subheader>Kingdom Story Wiki</v-subheader>
+      <v-subheader>Stuffs you can do..</v-subheader>
       <v-list-item-group color="primary">
         <v-list-item
           v-for="(item, i) in items"
@@ -27,26 +27,26 @@ import Vue from "vue";
 export default Vue.extend({
   name: "NavDrawer",
   components: {},
-  data: () => ({
-    d_showDrawer: false as boolean,
-    items: [
-      { text: "Home", icon: "mdi-bell-outline", route: "/" },
-      { text: "New post", icon: "mdi-draw", route: "/new-post" },
-    ],
-    mini: true,
-    isLogin: false,
-  }),
   props: {
     showDrawer: {
       type: Boolean,
       required: true,
-      default: (): boolean => {
+      default(): boolean {
         return false;
       },
     },
   },
+  data() {
+    return {
+      d_showDrawer: false as boolean,
+      items: [
+        { text: "Home", icon: "mdi-bell-outline", route: "/" },
+        { text: "New post", icon: "mdi-draw", route: "/new-post" },
+      ],
+    };
+  },
   watch: {
-    showDrawer: function(newShowDrawer) {
+    showDrawer(newShowDrawer): void {
       if (newShowDrawer != this.d_showDrawer) {
         this.d_showDrawer = newShowDrawer;
         return;

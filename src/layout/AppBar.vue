@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app id="app-bar">
     <v-app-bar-nav-icon @click.stop="m_onClickNavIcon"></v-app-bar-nav-icon>
     <v-toolbar-title router to="/">Kingdom Story Wiki</v-toolbar-title>
     <!-- <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from "vue";
+import Vue, { PropType } from "vue";
 
 export interface AppBarLinkModel {
   url: string;
@@ -22,15 +22,17 @@ export default Vue.extend({
   name: "AppBar",
   props: {
     links: {
-      type: Array,
+      type: Array as PropType<AppBarLinkModel[]>,
       default() {
         return [];
       },
-    } as PropOptions<AppBarLinkModel[]>,
+    },
   },
-  data: () => ({}),
+  data() {
+    return {};
+  },
   methods: {
-    m_onClickNavIcon: function() {
+    m_onClickNavIcon(): void {
       this.$emit("e_toggleNavDrawer");
     },
   },

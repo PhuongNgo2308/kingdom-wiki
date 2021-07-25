@@ -1,10 +1,12 @@
 <template>
-  <VueEditor
-    :id="c_id"
-    :disabled="true"
-    :editorOptions="d_editorOptions"
-    v-model="d_inputContent"
-  ></VueEditor>
+  <v-card>
+    <VueEditor
+      :id="c_combinedId"
+      :disabled="true"
+      :editorOptions="d_editorOptions"
+      v-model="c_content"
+    ></VueEditor>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -13,7 +15,7 @@ import { VueEditor } from "vue2-editor";
 import Base from "@/common_components/Base.vue";
 
 export default Vue.extend({
-  name: "CustomEditor",
+  name: "ViewModeEditor",
   extends: Base,
   components: {
     VueEditor,
@@ -21,39 +23,26 @@ export default Vue.extend({
   props: {
     content: {
       type: String,
-      default: (): string => {
+      default(): string {
         return "";
       },
     },
-    // exId: {
-    //   type: String,
-    //   required: true,
-    //   default: (): string => {
-    //     return "";
-    //   },
-    // },
   },
-  data: () => ({
-    d_inputContent: "" as string,
-    d_editorOptions: {
-      disabled: true,
-      modules: {
-        toolbar: false,
+  data() {
+    return {
+      d_editorOptions: {
+        disabled: true,
+        modules: {
+          toolbar: false,
+        },
       },
-    },
-  }),
+    };
+  },
   computed: {
-    // c_id: function() {
-    //   return `${this.exId}--view-mode-editor`;
-    // },
-  },
-  watch: {
-    content: function(newVal) {
-      this.d_inputContent = newVal;
+    c_content() {
+      return this.content;
     },
   },
-  //   mounted() {
-  //     console.log(this);
-  //   },
+  // mounted() {},
 });
 </script>
