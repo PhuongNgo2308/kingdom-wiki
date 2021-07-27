@@ -17,6 +17,12 @@ export default Vue.extend({
         return "";
       },
     },
+    classString: {
+      type: String,
+      default(): string {
+        return "";
+      },
+    },
   },
   computed: {
     // used for components id, indicate the recursive calling, ex: parentpage--child-component

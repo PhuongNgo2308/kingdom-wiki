@@ -2,13 +2,12 @@
   <v-container :id="c_combinedId">
     <v-row>
       <v-col class="mb-4">
-        <VueEditor
-          id="editor1"
-          class="text-editor"
-          v-model="d_inputContent"
+        <Editor
+          :exId="c_combinedId"
+          :content="d_inputContent"
           :editorOptions="d_editorOptions"
           :editorToolbar="d_editorToolbars"
-        ></VueEditor>
+        ></Editor>
       </v-col>
     </v-row>
     <ViewModeEditor
@@ -20,14 +19,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { VueEditor } from "vue2-editor";
 import Base from "@/common_components/Base.vue";
+import Editor from "@/common_components/Editor.vue";
 import ViewModeEditor from "@/common_components/ViewModeEditor.vue";
 
 export default Vue.extend({
   name: "Intro",
   components: {
-    VueEditor,
+    Editor,
     ViewModeEditor,
   },
   extends: Base,

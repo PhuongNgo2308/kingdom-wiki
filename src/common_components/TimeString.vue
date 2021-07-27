@@ -1,5 +1,5 @@
 <template>
-  <span :id="c_id" :class="cssClass">
+  <span :id="c_id" :class="classString">
     {{ c_timeString }}
   </span>
 </template>
@@ -10,10 +10,10 @@ import moment from "moment";
 import Base from "@/common_components/Base.vue";
 
 export enum TimeStringMode {
-  LOCAL_DATE_TIME, //~moment().format("LLLL") : Saturday, July 24, 2021 2:14 PM
+  ISO, //~moment().toISOString() : 2021-07-24T07:35:47.054Z
   FROM_NOW, //~moment().fromNow() : a few seconds ago, a day ago
   CALENDAR, //~moment().calendar() : Today at 2:14 PM, Yesterday at 2:14 PM
-  ISO, //~moment().toISOString() : 2021-07-24T07:35:47.054Z
+  LOCAL_DATE_TIME, //~moment().format("LLLL") : Saturday, July 24, 2021 2:14 PM
 }
 
 export default Vue.extend({
@@ -21,23 +21,17 @@ export default Vue.extend({
   extends: Base,
   components: {},
   props: {
-    cssClass: {
-      type: String,
-      default: (): string => {
-        return "";
-      },
-    },
     utcDateString: {
       type: String,
       required: true,
-      default: (): string => {
+      default(): string {
         return moment().toISOString();
       },
     },
     displayMode: {
       type: Object as PropType<TimeStringMode>,
       required: true,
-      default: () => {
+      default(): TimeStringMode {
         return TimeStringMode.LOCAL_DATE_TIME;
       },
     },
