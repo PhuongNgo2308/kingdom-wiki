@@ -33,7 +33,7 @@ export default Vue.extend({
   },
   methods: {
     m_onClickNavIcon(): void {
-      this.$emit("e_toggleNavDrawer");
+      this.$emit("e_toggle-nav-drawer");
     },
   },
 });

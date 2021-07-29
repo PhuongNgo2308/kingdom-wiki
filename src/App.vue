@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <AppBar @e_toggleNavDrawer="m_togglerDrawer"></AppBar>
-    <NavDrawer :showDrawer="d_showDrawer"></NavDrawer>
+    <AppBar @e_toggle-nav-drawer="m_togglerDrawer"></AppBar>
+    <NavDrawer :show-drawer="d_showDrawer"></NavDrawer>
     <v-main>
       <v-container>
         <router-view />
@@ -20,8 +20,8 @@ import AppBar from "@/layout/AppBar.vue";
 export default Vue.extend({
   name: "App",
   components: {
-    NavDrawer,
     AppBar,
+    NavDrawer,
   },
   data() {
     return {

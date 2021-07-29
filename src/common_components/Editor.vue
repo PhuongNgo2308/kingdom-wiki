@@ -2,16 +2,20 @@
   <VueEditor
     :id="c_combinedId"
     v-model="d_content"
-    :editorOptions="d_editorOptions"
-    :editorToolbar="d_editorToolbars"
+    :editor-options="d_editorOptions"
+    :editor-toolbar="d_editorToolbars"
     ref="editor"
   ></VueEditor>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
 import { VueEditor } from "vue2-editor";
-import BaseEditor from "./BaseEditor.vue";
+import BaseEditor from "@/common_components/BaseEditor.vue";
+
+export interface EditorContentModel {
+  content?: string;
+}
 
 export default Vue.extend({
   name: "Editor",
@@ -22,11 +26,10 @@ export default Vue.extend({
   props: {},
   data() {
     return {
-      d_inputContent: "" as string,
       d_editorOptions: {
         placeholder: "Compose an epic...",
         spellcheck: "false",
-      } as any,
+      },
       d_editorToolbars: [
         [{ header: [1, 2, false] }],
         [{ size: ["small", false, "large", "huge"] }], // custom dropdown
@@ -41,12 +44,23 @@ export default Vue.extend({
         // [{ direction: "rtl" }], // text direction
         // [{ script: "sub" }, { script: "super" }],
         // ["blockquote", "code-block"],
-      ] as any[],
+      ],
     };
+  },
+  watch: {
+    d_content(newValue): void {
+      let _content = this.createContent(newValue);
+      this.$emit("on-content-changed", _content);
+    },
   },
   // computed: {},
   // mounted(): void {
   //   (this.$refs.editor as any).$el.setAttribute("spellcheck", false);
   // },
+  methods: {
+    createContent(content: string): EditorContentModel {
+      return { content: content };
+    },
+  },
 });
 </script>

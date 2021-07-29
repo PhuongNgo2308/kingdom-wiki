@@ -18,11 +18,6 @@ export default Vue.extend({
       d_content: "" as string,
     };
   },
-  computed: {
-    c_content(): string {
-      return this.content;
-    },
-  },
   watch: {
     content(newValue): void {
       this.d_content = newValue;

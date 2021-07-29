@@ -41,7 +41,7 @@ export default Vue.extend({
   }),
   mounted(): void {},
   computed: {
-    c_timeString: function() {
+    c_timeString(): string {
       if (this.displayMode === TimeStringMode.FROM_NOW)
         return `${moment(this.utcDateString).fromNow()}`;
       if (this.displayMode === TimeStringMode.CALENDAR)

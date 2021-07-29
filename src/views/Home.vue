@@ -1,7 +1,7 @@
 <template>
   <v-container :id="d_componentId" class="home">
     <h2>Home</h2>
-    <Intro :exId="d_componentId" />
+    <Intro :ex-id="d_componentId" />
   </v-container>
 </template>
 
