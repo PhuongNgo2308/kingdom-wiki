@@ -1,11 +1,15 @@
 <template>
   <v-app-bar app id="app-bar">
-    <v-app-bar-nav-icon @click.stop="m_onClickNavIcon"></v-app-bar-nav-icon>
-    <v-toolbar-title router to="/">Kingdom Story Wiki</v-toolbar-title>
-    <!-- <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn> -->
+    <v-app-bar-nav-icon @click.stop="m_onClickNavIcon">
+      <v-icon color="primary">mdi-table-of-contents</v-icon>
+    </v-app-bar-nav-icon>
+    <v-toolbar-title>
+      <v-btn icon x-large to="/" color="grey">
+        <v-avatar size="45" color="primary lighten-1">
+          <span class="white--text">KSW</span></v-avatar
+        >
+      </v-btn>
+    </v-toolbar-title>
   </v-app-bar>
 </template>
 

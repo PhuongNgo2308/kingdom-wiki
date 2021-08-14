@@ -11,7 +11,7 @@ Vue.use(Vuetify);
 // });
 
 const light: Partial<VuetifyThemeVariant> = {
-  primary: "#3f51b5",
+  primary: "#c5532b",
   secondary: "#2196f3",
   accent: "#03a9f4",
   error: "#f44336",

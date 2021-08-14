@@ -1,20 +1,13 @@
 <template>
-  <span :id="c_id" :class="classString">
+  <span :id="c_combinedId" :class="classString">
     {{ c_timeString }}
   </span>
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import Vue from "vue";
 import moment from "moment";
 import Base from "@/common_components/Base.vue";
-
-export enum TimeStringMode {
-  ISO, //~moment().toISOString() : 2021-07-24T07:35:47.054Z
-  FROM_NOW, //~moment().fromNow() : a few seconds ago, a day ago
-  CALENDAR, //~moment().calendar() : Today at 2:14 PM, Yesterday at 2:14 PM
-  LOCAL_DATE_TIME, //~moment().format("LLLL") : Saturday, July 24, 2021 2:14 PM
-}
 
 export default Vue.extend({
   name: "TimeString",
@@ -29,17 +22,15 @@ export default Vue.extend({
       },
     },
     displayMode: {
-      type: Object as PropType<TimeStringMode>,
-      required: true,
-      default(): TimeStringMode {
+      type: Number,
+      default(): number {
         return TimeStringMode.LOCAL_DATE_TIME;
       },
     },
   },
-  data: () => ({
-    d_id: "TimeString",
-  }),
-  mounted(): void {},
+  data() {
+    return {};
+  },
   computed: {
     c_timeString(): string {
       if (this.displayMode === TimeStringMode.FROM_NOW)
@@ -53,4 +44,11 @@ export default Vue.extend({
     },
   },
 });
+
+export enum TimeStringMode {
+  ISO, //~moment().toISOString() : 2021-07-24T07:35:47.054Z
+  FROM_NOW, //~moment().fromNow() : a few seconds ago, a day ago
+  CALENDAR, //~moment().calendar() : Today at 2:14 PM, Yesterday at 2:14 PM
+  LOCAL_DATE_TIME, //~moment().format("LLLL") : Saturday, July 24, 2021 2:14 PM
+}
 </script>

@@ -6,8 +6,8 @@
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
-          router
           :to="item.route"
+          router
         >
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
@@ -40,7 +40,7 @@ export default Vue.extend({
     return {
       d_showDrawer: false as boolean,
       items: [
-        { text: "Home", icon: "mdi-bell-outline", route: "/" },
+        { text: "Home", icon: "mdi-home-outline", route: "/" },
         { text: "New post", icon: "mdi-draw", route: "/new-post" },
       ],
     };

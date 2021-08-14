@@ -3,8 +3,8 @@
     :id="c_combinedId"
     :disabled="true"
     :editorOptions="d_editorOptions"
-    :class="classString"
-    v-model="d_content"
+    :class="`${classString} vme`"
+    v-model="content"
     ref="editor"
   ></VueEditor>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { VueEditor } from "vue2-editor";
-import BaseEditor from "./BaseEditor.vue";
+import BaseEditor from "@/common_components/BaseEditor.vue";
 
 export default Vue.extend({
   name: "ViewModeEditor",
@@ -36,3 +36,8 @@ export default Vue.extend({
   // mounted() {},
 });
 </script>
+
+<style lang="sass">
+.vme .ql-container
+  border: none !important
+</style>

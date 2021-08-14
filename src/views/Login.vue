@@ -13,9 +13,11 @@ interface LoginModel {
 export default Vue.extend({
   name: "Login",
   components: {},
-  data: () => ({
-    d_loginInput: {} as LoginModel,
-  }),
+  data() {
+    return {
+      d_loginInput: {} as LoginModel,
+    };
+  },
 });
 </script>
 

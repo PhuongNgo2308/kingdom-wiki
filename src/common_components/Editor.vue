@@ -1,15 +1,15 @@
 <template>
   <VueEditor
     :id="c_combinedId"
-    v-model="d_content"
     :editor-options="d_editorOptions"
     :editor-toolbar="d_editorToolbars"
+    v-model="d_content"
     ref="editor"
   ></VueEditor>
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import Vue from "vue";
 import { VueEditor } from "vue2-editor";
 import BaseEditor from "@/common_components/BaseEditor.vue";
 

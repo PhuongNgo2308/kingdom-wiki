@@ -1,5 +1,6 @@
 <script lang="ts">
 import Vue from "vue";
+
 // base class for all components
 // contain the shared props and stuffs
 export default Vue.extend({
@@ -7,6 +8,7 @@ export default Vue.extend({
   data() {
     return {
       d_componentId: this.$options.name?.toLowerCase(),
+      d_combinedId: "",
     };
   },
   props: {
@@ -27,7 +29,10 @@ export default Vue.extend({
   computed: {
     // used for components id, indicate the recursive calling, ex: parentpage--child-component
     c_combinedId(): string {
-      return `${this.exId?.toLowerCase() || "root"}--${this.d_componentId}`;
+      const _extid = this.exId?.toLowerCase() || "root";
+      const _comId = this.d_componentId;
+
+      return `${_extid}--${_comId}`;
     },
   },
 });
