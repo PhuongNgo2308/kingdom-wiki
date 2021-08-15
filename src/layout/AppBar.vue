@@ -10,6 +10,12 @@
         >
       </v-btn>
     </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn icon to="/login" class="mr-2" link>
+      <v-icon>
+        mdi-login-variant
+      </v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 

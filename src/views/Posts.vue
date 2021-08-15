@@ -2,16 +2,16 @@
   <v-container class="posts" :id="d_componentId">
     <v-list three-line>
       <template v-for="(item, index) in d_posts">
-        <v-list-item :key="index" link route :to="`/view-post/${item.pid}`">
+        <v-list-item :key="item.id" link route :to="`/view-post/${item.pid}`">
           <v-list-item-avatar>
             <v-img src="@/assets/ks_bia.png"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title class="text-caption">
+            <v-list-item-title class="text-caption mb-2 pl-1">
               {{ item.author }} -
               <TimeString
-                :exId="d_componentId"
+                :exId="`${d_componentId}--${index}`"
                 :utcDateString="item.created"
                 :displayMode="TimeStringMode.CALENDAR"
               ></TimeString>
@@ -27,7 +27,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Base from "@/common_components/Base.vue";
-import { postDB } from "@/services/fsDb";
+import { postService } from "@/services/dataServices";
 import TimeString, { TimeStringMode } from "@/common_components/TimeString.vue";
 import rcMixin from "@/mixins/routes-config";
 
@@ -45,7 +45,7 @@ export default Vue.extend({
   },
   created() {
     const self = this as any;
-    postDB
+    postService
       .orderBy("created", "desc")
       .get()
       .then((querySnapshot) => {

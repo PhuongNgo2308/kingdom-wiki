@@ -16,7 +16,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-card
+        <v-card outlined
           ><ViewModeEditor
             :exId="d_componentId"
             :content="d_postData.content"
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { postDB } from "@/services/fsDb";
+import { postService } from "@/services/dataServices";
 import Base from "@/common_components/Base.vue";
 import ViewModeEditor from "@/common_components/ViewModeEditor.vue";
 import TimeString, { TimeStringMode } from "@/common_components/TimeString.vue";
@@ -54,7 +54,7 @@ export default Vue.extend({
   },
   created() {
     const self = this as any;
-    postDB
+    postService
       .doc(this.pid)
       .get()
       .then((snapshot) => {

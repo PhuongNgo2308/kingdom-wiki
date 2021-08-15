@@ -50,7 +50,7 @@ html
 
 .main-container
   // width: 100vw
-  height: calc(100vh - 64px)
+  height: calc(100vh - 96px)
   flex-direction: column
   overflow: auto
   margin-top: 64px

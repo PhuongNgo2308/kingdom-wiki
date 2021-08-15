@@ -2,18 +2,22 @@
   <v-container class="new-post" :id="d_componentId">
     <Editor :ex-id="c_combinedId" @on-content-changed="contentChanged"></Editor>
     <v-divider></v-divider>
-    <v-row class="mt-3 pa-2">
+    <v-row class="mt-3 pr-3">
       <v-spacer></v-spacer>
       <v-btn
-        depressed
-        class="mr-3"
-        color="primary"
         :loading="d_submitting"
         :disabled="d_submitting"
         @click="onSubmitPost"
+        class="mr-3 font-weight-bold"
+        color="primary"
+        plain
+        outlined
+        rounded
         >Submit</v-btn
       >
-      <v-btn depressed @click="onCancelPost">Cancel</v-btn>
+      <v-btn @click="onCancelPost" color="decent" plain rounded outlined
+        >Cancel</v-btn
+      >
     </v-row>
   </v-container>
 </template>
@@ -21,7 +25,7 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
-import { postDB } from "@/services/fsDb";
+import { postService } from "@/services/dataServices";
 import Base from "@/common_components/Base.vue";
 import Editor, { EditorContentModel } from "@/common_components/Editor.vue";
 
@@ -57,7 +61,7 @@ export default Vue.extend({
         author: "Admin",
       };
 
-      postDB.add(_newPost).then((rs) => {
+      postService.add(_newPost).then((rs) => {
         this.d_submitting = false;
         this.onCancelPost();
       });

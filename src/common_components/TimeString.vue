@@ -43,6 +43,9 @@ export default Vue.extend({
       return `${moment(this.utcDateString).format("LLLL")}`;
     },
   },
+  created() {
+    moment.locale("vi");
+  },
 });
 
 export enum TimeStringMode {

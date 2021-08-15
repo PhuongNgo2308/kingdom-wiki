@@ -1,5 +1,5 @@
 <template>
-  <v-container class="login" :id="d_componentId">
+  <v-container class="register" :id="d_componentId">
     <v-card class="py-4 px-5" outlined>
       <v-form ref="form" v-model="valid" class="mt-5">
         <v-row>
@@ -41,7 +41,7 @@
               outlined
               rounded
             >
-              Login
+              Submit
             </v-btn>
           </v-col>
         </v-row>
@@ -54,18 +54,18 @@
 import Vue from "vue";
 import Base from "@/common_components/Base.vue";
 
-interface LoginModel {
+interface RegisterModel {
   email: string;
   password?: string;
 }
 
 export default Vue.extend({
-  name: "Login",
+  name: "Register",
   extends: Base,
   components: {},
   data() {
     return {
-      d_loginInput: {} as LoginModel,
+      d_registerData: {} as RegisterModel,
       valid: false as boolean,
       showPassword: false as boolean,
       email: "" as string,
@@ -85,7 +85,7 @@ export default Vue.extend({
   },
   methods: {
     onSubmit(): void {
-      const cre: LoginModel = {
+      const cre: RegisterModel = {
         email: this.email,
         password: this.password,
       };

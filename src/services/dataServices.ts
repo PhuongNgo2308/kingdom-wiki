@@ -1,13 +1,12 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import fbService from "@/services/fbService";
 
 // Get a Firestore instance
-const db = firebase
-  .initializeApp({ projectId: "kingdom-wiki-4f5f9" })
-  .firestore();
+const db = fbService.firestore();
 const { Timestamp, GeoPoint } = firebase.firestore;
 
-const postDB = db.collection("posts");
+const postService = db.collection("posts");
 
 export { Timestamp, GeoPoint };
-export { postDB };
+export { postService };

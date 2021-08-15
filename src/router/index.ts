@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "@/views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -8,6 +7,7 @@ export const ROUTES_CONFIG: any = Object.freeze({
   // HOME: ["/", "Home", Home], // 0: path, 1: Name; 2: Component
   HOME: ["/", "Posts", () => import("@/views/Posts.vue")], // 0: path, 1: Name; 2: Component
   LOGIN: ["/login", "Login", () => import("@/views/Login.vue")],
+  REGISTER: ["/reg", "Register", () => import("@/views/Register.vue")],
   NEW_POST: ["/new-post", "NewPost", () => import("@/views/NewPost.vue")],
   VIEW_POST: [
     "/view-post/:pid",

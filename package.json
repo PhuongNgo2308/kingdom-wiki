@@ -11,11 +11,9 @@
   "dependencies": {
     "@firebase/app": "^0.6.29",
     "@firebase/app-types": "^0.6.3",
-    "@types/lru-cache": "^5.1.1",
     "@types/vue2-editor": "^2.6.1",
     "core-js": "^3.6.5",
     "firebase": "^8.9.1",
-    "lru-cache": "^6.0.0",
     "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
