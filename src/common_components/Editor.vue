@@ -34,9 +34,12 @@ export default Vue.extend({
         [{ header: [1, 2, false] }],
         [{ size: ["small", false, "large", "huge"] }], // custom dropdown
         ["bold", "italic", "underline"],
-        [{ color: ["#821010", "red"] }, { background: ["yellow", "#afa9a9"] }],
+        [
+          { color: ["#c5532b", "red", "silver", "black"] },
+          { background: ["yellow", "#afa9a9"] },
+        ],
         [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-        ["blockquote"],
+        ["blockquote", "link"],
         [{ list: "ordered" }, { list: "bullet" }],
         ["image"],
         ["clean"],

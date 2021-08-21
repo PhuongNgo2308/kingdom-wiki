@@ -3,7 +3,8 @@
     <AppBar @e_toggle-nav-drawer="m_togglerDrawer"></AppBar>
     <NavDrawer :show-drawer="d_showDrawer"></NavDrawer>
     <v-main class="main-container">
-      <v-container>
+      <v-container class="inner-container">
+        <PageLoading v-if="isPageLoading" />
         <router-view />
       </v-container>
     </v-main>
@@ -21,12 +22,15 @@
 import Vue from "vue";
 import NavDrawer from "@/layout/NavDrawer.vue";
 import AppBar from "@/layout/AppBar.vue";
+import { mapGetters } from "vuex";
+import PageLoading from "@/common_components/PageLoading.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
     AppBar,
     NavDrawer,
+    PageLoading,
   },
   data() {
     return {
@@ -40,6 +44,9 @@ export default Vue.extend({
     m_togglerDrawer(): void {
       this.d_showDrawer = !this.d_showDrawer;
     },
+  },
+  computed: {
+    ...mapGetters(["isPageLoading"]),
   },
 });
 </script>
@@ -61,6 +68,9 @@ html
 
 .ql-toolbar *
   font-family: $body-font-family !important
+
+.inner-container, .row.no-gutters.align-center
+  height: 100%
 
 // .vme .ql-container
 //   border: none !important

@@ -1,15 +1,28 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isPageLoading: true,
   },
-  mutations: {
+  getters: {
+    isPageLoading(state): boolean {
+      return state.isPageLoading;
+    },
   },
   actions: {
+    setPageLoading({ commit, state }, isLoading) {
+      console.log("ACTION setPageLoading dispatched!!!");
+      commit("setPageLoading", { isLoading });
+    },
   },
-  modules: {
-  }
-})
+  mutations: {
+    setPageLoading(state, { isLoading }) {
+      state.isPageLoading = isLoading;
+    },
+  },
+
+  modules: {},
+});

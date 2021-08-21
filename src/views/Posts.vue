@@ -1,5 +1,5 @@
 <template>
-  <v-container class="posts" :id="d_componentId">
+  <v-container class="posts" :id="d_componentId" v-if="isReady">
     <v-list three-line>
       <template v-for="(item, index) in d_posts">
         <v-list-item :key="item.id" link route :to="`/view-post/${item.pid}`">
@@ -13,7 +13,7 @@
               <TimeString
                 :exId="`${d_componentId}--${index}`"
                 :utcDateString="item.created"
-                :displayMode="TimeStringMode.CALENDAR"
+                :displayMode="TimeStringMode.FROM_NOW"
               ></TimeString>
             </v-list-item-title>
             <v-list-item-subtitle v-html="item.content"></v-list-item-subtitle>
@@ -26,6 +26,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapActions } from "vuex";
 import Base from "@/common_components/Base.vue";
 import { postService } from "@/services/dataServices";
 import TimeString, { TimeStringMode } from "@/common_components/TimeString.vue";
@@ -45,6 +46,7 @@ export default Vue.extend({
   },
   created() {
     const self = this as any;
+    this.setPageLoading(true);
     postService
       .orderBy("created", "desc")
       .get()
@@ -52,10 +54,17 @@ export default Vue.extend({
         self.d_posts = querySnapshot.docs.map(function(doc) {
           return { ...doc.data(), pid: doc.id };
         });
+        this.setPageLoading(false);
       });
   },
   computed: {
+    isReady(): boolean {
+      return this.d_posts?.length > 0;
+    },
     TimeStringMode: () => TimeStringMode, //usage for enum
+  },
+  methods: {
+    ...mapActions(["setPageLoading"]),
   },
 });
 </script>

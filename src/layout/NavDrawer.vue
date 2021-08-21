@@ -1,7 +1,11 @@
 <template>
   <v-navigation-drawer app v-model="d_showDrawer" id="nav-drawer">
     <v-list dense>
-      <v-subheader>Stuffs you can do..</v-subheader>
+      <v-subheader class="px-0 mb-7">
+        <v-card tile>
+          <v-img src="@/assets/ks_bia.png" height="95px"></v-img>
+        </v-card>
+      </v-subheader>
       <v-list-item-group color="primary">
         <v-list-item
           v-for="(item, i) in items"
@@ -40,8 +44,8 @@ export default Vue.extend({
     return {
       d_showDrawer: false as boolean,
       items: [
-        { text: "Home", icon: "mdi-home-outline", route: "/" },
-        { text: "New post", icon: "mdi-draw", route: "/new-post" },
+        { text: "Trang chủ", icon: "mdi-home-outline", route: "/" },
+        { text: "Tạo bài viết", icon: "mdi-draw", route: "/new-post" },
       ],
     };
   },

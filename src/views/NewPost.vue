@@ -1,7 +1,6 @@
 <template>
   <v-container class="new-post" :id="d_componentId">
     <Editor :ex-id="c_combinedId" @on-content-changed="contentChanged"></Editor>
-    <v-divider></v-divider>
     <v-row class="mt-3 pr-3">
       <v-spacer></v-spacer>
       <v-btn

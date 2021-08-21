@@ -8,7 +8,7 @@ import authService from "@/services/authService";
 Vue.config.productionTip = false;
 
 authService.onAuthStateChanged((user) => {
-  debugger;
+  console.log(user);
 });
 
 new Vue({
