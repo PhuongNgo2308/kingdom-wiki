@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -36,10 +37,16 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  console.log("Changing ROUTE");
+  store.dispatch("setPageLoading", true);
+  next();
+});
 
-// router.afterEach(() => {});
+router.afterEach((to, from) => {
+  // if (to.name === from.name) {
+  //   store.dispatch("setPageLoading", false);
+  // }
+});
 
 export default router;

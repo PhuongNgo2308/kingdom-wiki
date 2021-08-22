@@ -1,5 +1,6 @@
 <script lang="ts">
 import Vue from "vue";
+import { mapActions, mapGetters } from "vuex";
 
 // base class for all components
 // contain the shared props and stuffs
@@ -34,6 +35,10 @@ export default Vue.extend({
 
       return `${_extid}--${_comId}`;
     },
+    ...mapGetters(["isPageLoading"]),
+  },
+  methods: {
+    ...mapActions(["setPageLoading"]),
   },
 });
 </script>

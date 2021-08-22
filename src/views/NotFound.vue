@@ -1,5 +1,5 @@
 <template>
-  <v-container class="login" :id="d_componentId">
+  <v-container class="login" :id="d_componentId" v-if="!isPageLoading">
     <v-card class="py-4 px-5" outlined>
       <v-row>
         <v-col class="text-center">

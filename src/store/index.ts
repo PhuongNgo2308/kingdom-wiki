@@ -14,7 +14,6 @@ export default new Vuex.Store({
   },
   actions: {
     setPageLoading({ commit, state }, isLoading) {
-      console.log("ACTION setPageLoading dispatched!!!");
       commit("setPageLoading", { isLoading });
     },
   },

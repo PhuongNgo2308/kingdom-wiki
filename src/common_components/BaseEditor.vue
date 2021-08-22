@@ -18,13 +18,10 @@ export default Vue.extend({
       d_content: "" as string,
     };
   },
-  watch: {
-    content(newValue): void {
-      this.d_content = newValue;
-    },
-  },
   mounted(): void {
     (this.$refs.editor as any)?.$el.setAttribute("spellcheck", false);
   },
+  // watch: {},
+  // computed: {},
 });
 </script>

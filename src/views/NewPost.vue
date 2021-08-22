@@ -1,5 +1,5 @@
 <template>
-  <v-container class="new-post" :id="d_componentId">
+  <v-container class="new-post" :id="d_componentId" v-if="!isPageLoading">
     <Editor :ex-id="c_combinedId" @on-content-changed="contentChanged"></Editor>
     <v-row class="mt-3 pr-3">
       <v-spacer></v-spacer>
@@ -68,6 +68,9 @@ export default Vue.extend({
     onCancelPost(): void {
       this.$router.push("/");
     },
+  },
+  created() {
+    this.setPageLoading(false);
   },
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="posts" :id="d_componentId" v-if="isReady">
+  <v-container class="posts" :id="d_componentId" v-if="!isPageLoading">
     <v-list three-line>
       <template v-for="(item, index) in d_posts">
         <v-list-item :key="item.id" link route :to="`/view-post/${item.pid}`">
@@ -46,7 +46,6 @@ export default Vue.extend({
   },
   created() {
     const self = this as any;
-    this.setPageLoading(true);
     postService
       .orderBy("created", "desc")
       .get()
@@ -54,17 +53,11 @@ export default Vue.extend({
         self.d_posts = querySnapshot.docs.map(function(doc) {
           return { ...doc.data(), pid: doc.id };
         });
-        this.setPageLoading(false);
+        self.setPageLoading(false);
       });
   },
   computed: {
-    isReady(): boolean {
-      return this.d_posts?.length > 0;
-    },
     TimeStringMode: () => TimeStringMode, //usage for enum
-  },
-  methods: {
-    ...mapActions(["setPageLoading"]),
   },
 });
 </script>

@@ -31,7 +31,7 @@ export default Vue.extend({
         spellcheck: "false",
       },
       d_editorToolbars: [
-        [{ header: [1, 2, false] }],
+        [{ header: [1, 2, 3, 4, false] }],
         [{ size: ["small", false, "large", "huge"] }], // custom dropdown
         ["bold", "italic", "underline"],
         [
@@ -50,19 +50,13 @@ export default Vue.extend({
       ],
     };
   },
-  watch: {
-    d_content(newValue): void {
-      let _content = this.createContent(newValue);
-      this.$emit("on-content-changed", _content);
-    },
+  methods: {},
+  created(): void {
+    this.d_content = this.content;
   },
-  // computed: {},
-  // mounted(): void {
-  //   (this.$refs.editor as any).$el.setAttribute("spellcheck", false);
-  // },
-  methods: {
-    createContent(content: string): EditorContentModel {
-      return { content: content };
+  watch: {
+    d_content(newVal): void {
+      this.$emit("on-content-changed", { content: newVal });
     },
   },
 });
