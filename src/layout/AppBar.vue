@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app id="app-bar">
+  <v-app-bar id="app-bar" app flat>
     <v-app-bar-nav-icon @click.stop="m_onClickNavIcon">
       <v-icon color="primary">mdi-table-of-contents</v-icon>
     </v-app-bar-nav-icon>
@@ -11,9 +11,15 @@
       </v-btn>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon to="/login" class="mr-2" link>
+    <v-btn v-if="!uname" icon to="/login" class="mr-2" link>
       <v-icon>
         mdi-login-variant
+      </v-icon>
+    </v-btn>
+    <v-btn v-if="uname" icon @click="m_logOut" class="mr-2" link>
+      {{ uname }}
+      <v-icon>
+        mdi-logout-variant
       </v-icon>
     </v-btn>
   </v-app-bar>
@@ -21,6 +27,8 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import { mapGetters } from "vuex";
+import authService from "@/services/authService";
 
 export interface AppBarLinkModel {
   url: string;
@@ -41,9 +49,15 @@ export default Vue.extend({
   data() {
     return {};
   },
+  computed: {
+    ...mapGetters(["uname"]),
+  },
   methods: {
     m_onClickNavIcon(): void {
-      this.$emit("e_toggle-nav-drawer");
+      this.$emit("e_toggleNavDrawer");
+    },
+    m_logOut(): void {
+      authService.signOut();
     },
   },
 });

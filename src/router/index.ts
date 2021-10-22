@@ -5,17 +5,38 @@ import store from "@/store";
 Vue.use(VueRouter);
 
 export const ROUTES_CONFIG: any = Object.freeze({
-  HOME: ["/", "Posts", () => import("@/views/Posts.vue")], // 0: path, 1: Name; 2: Component
-  // LOGIN: ["/login", "Login", () => import("@/views/Login.vue")],
-  // REGISTER: ["/reg", "Register", () => import("@/views/Register.vue")],
-  // NEW_POST: ["/new-post", "NewPost", () => import("@/views/NewPost.vue")],
+  HOME: [
+    "/",
+    "Posts",
+    () => import(/* webpackChunkName: "posts" */ "@/views/Posts.vue"),
+  ], // 0: path, 1: Name; 2: Component
+  LOGIN: [
+    "/login",
+    "Login",
+    () => import(/* webpackChunkName: "login" */ "@/views/Login.vue"),
+  ],
+  REGISTER: [
+    "/reg",
+    "Register",
+    () => import(/* webpackChunkName: "reg" */ "@/views/Register.vue"),
+  ],
+  NEW_POST: [
+    "/new-post",
+    "NewPost",
+    () => import(/* webpackChunkName: "newpost" */ "@/views/NewPost.vue"),
+    { props: true, meta: { requiresAuth: true } },
+  ],
   VIEW_POST: [
     "/view-post/:pid",
     "ViewPost",
-    () => import("@/views/ViewPost.vue"),
+    () => import(/* webpackChunkName: "viewpost" */ "@/views/ViewPost.vue"),
     { props: true, meta: {} },
   ],
-  NOT_FOUND: ["*", "NotFound", () => import("@/views/NotFound.vue")],
+  NOT_FOUND: [
+    "*",
+    "NotFound",
+    () => import(/* webpackChunkName: "notfound" */ "@/views/NotFound.vue"),
+  ],
 });
 
 const routes: Array<RouteConfig> = [];
@@ -37,16 +58,35 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  console.log("Changing ROUTE");
-  store.dispatch("setPageLoading", true);
-  next();
-});
+router.beforeEach(async (to, from, next) => {
+  const { uid } = { ...store.getters.uif };
 
-router.afterEach((to, from) => {
-  // if (to.name === from.name) {
-  //   store.dispatch("setPageLoading", false);
-  // }
+  // next-line: check if route ("to" object) needs authenticated
+  if (to.matched.some((record) => record.meta.requiresAuth) && !uid) {
+    if ("/login" != from.path) {
+      debugger;
+      store.dispatch("setPageLoading", true);
+      next({ name: "Login", query: { redirect: to.path } });
+    }
+  } else if (uid) {
+    debugger;
+    store.dispatch("setPageLoading", true);
+    switch (to.name) {
+      case "Login" || "Register" || "ResetPassword":
+        next({ path: "/" });
+        break;
+      default:
+        next();
+        break;
+    }
+  } else {
+    debugger;
+    store.dispatch("setPageLoading", true);
+    next();
+  }
+});
+router.afterEach(() => {
+  store.dispatch("setPageLoading", false);
 });
 
 export default router;

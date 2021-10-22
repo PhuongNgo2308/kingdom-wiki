@@ -142,7 +142,7 @@ export default Vue.extend({
           this.loadPost(this.pid);
         });
     },
-    loadPost(pid): void {
+    loadPost(pid: string): void {
       postService
         .doc(pid)
         .get()

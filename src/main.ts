@@ -4,11 +4,15 @@ import router from "@/router";
 import store from "@/store";
 import vuetify from "@/plugins/vuetify";
 import authService from "@/services/authService";
+import { UserInfoModel } from "@/store";
 
 Vue.config.productionTip = false;
 
 authService.onAuthStateChanged((user) => {
-  console.log(user);
+  const { uid, displayName: uname, email } = { ...user };
+  const uif: UserInfoModel = { uid, uname, email };
+  debugger;
+  store.dispatch("setUser", uif);
 });
 
 new Vue({

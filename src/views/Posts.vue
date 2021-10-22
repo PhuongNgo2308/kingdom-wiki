@@ -26,7 +26,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapActions } from "vuex";
 import Base from "@/common_components/Base.vue";
 import { postService } from "@/services/dataServices";
 import TimeString, { TimeStringMode } from "@/common_components/TimeString.vue";

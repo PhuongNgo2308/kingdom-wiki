@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppBar @e_toggle-nav-drawer="m_togglerDrawer"></AppBar>
+    <AppBar @e_toggleNavDrawer="m_togglerDrawer"></AppBar>
     <NavDrawer :show-drawer="d_showDrawer"></NavDrawer>
     <v-main class="main-container">
       <v-container class="inner-container">
@@ -57,7 +57,7 @@ html
 
 .main-container
   // width: 100vw
-  height: calc(100vh - 96px)
+  // height: calc(100vh - 96px)
   flex-direction: column
   overflow: auto
   margin-top: 64px

@@ -36,6 +36,7 @@
               @click="onSubmit"
               class="font-weight-bold"
               color="primary"
+              :loading="!d_isSubmitting"
               plain
               block
               outlined
@@ -53,6 +54,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Base from "@/common_components/Base.vue";
+import authService from "@/services/authService";
 
 interface RegisterModel {
   email: string;
@@ -65,7 +67,7 @@ export default Vue.extend({
   components: {},
   data() {
     return {
-      d_registerData: {} as RegisterModel,
+      d_isSubmitting: false,
       valid: false as boolean,
       showPassword: false as boolean,
       email: "" as string,
@@ -85,10 +87,15 @@ export default Vue.extend({
   },
   methods: {
     onSubmit(): void {
-      const cre: RegisterModel = {
-        email: this.email,
-        password: this.password,
-      };
+      authService
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+          debugger;
+        })
+        .catch((err) => {
+          debugger;
+        })
+        .finally(() => (this.d_isSubmitting = false));
     },
   },
 });

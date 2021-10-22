@@ -35,10 +35,19 @@ export default Vue.extend({
 
       return `${_extid}--${_comId}`;
     },
-    ...mapGetters(["isPageLoading"]),
+    ...mapGetters(["isPageLoading", "isLoggedIn"]),
   },
   methods: {
     ...mapActions(["setPageLoading"]),
+  },
+  watch: {
+    isLoggedIn(newVal) {
+      console.log(`isLoggedIn: ${newVal}`);
+      const redirect: any = this.$route.query.redirect || "/";
+      this.$router.replace({ path: redirect }).catch(() => {
+        debugger;
+      });
+    },
   },
 });
 </script>
