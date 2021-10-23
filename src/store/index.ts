@@ -31,12 +31,25 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setPageLoading({ commit, state }, isLoading) {
+    setPageLoading({ commit }, isLoading) {
       commit("SET_PAGE_LOADING", { isLoading });
     },
-    setUser({ commit, state }, uif) {
+    setUser({ commit }, uif) {
       commit("SET_USER", uif);
     },
+    // fetchUser({ commit }) {
+    //   return new Promise((resolve, reject) => {
+    //     Vue.http
+    //       .get("https://jsonplaceholder.typicode.com/users")
+    //       .then((response) => {
+    //         commit("FETCH_USERS", response.body);
+    //         resolve();
+    //       })
+    //       .catch((error) => {
+    //         console.log(error.statusText);
+    //       });
+    //   });
+    // },
   },
   mutations: {
     SET_PAGE_LOADING(state, { isLoading }) {

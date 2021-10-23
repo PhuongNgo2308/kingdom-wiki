@@ -30,6 +30,7 @@ import Base from "@/common_components/Base.vue";
 import { postService } from "@/services/dataServices";
 import TimeString, { TimeStringMode } from "@/common_components/TimeString.vue";
 import rcMixin from "@/mixins/routes-config";
+import { mapActions } from "vuex";
 
 export default Vue.extend({
   name: "Posts",
@@ -60,6 +61,9 @@ export default Vue.extend({
   },
   computed: {
     TimeStringMode: () => TimeStringMode, //usage for enum
+  },
+  methods: {
+    ...mapActions(["setPageLoading"]),
   },
 });
 </script>

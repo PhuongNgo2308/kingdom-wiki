@@ -82,8 +82,8 @@ router.beforeEach(async (to, from, next) => {
     next();
   }
 });
-router.afterEach(() => {
-  store.dispatch("setPageLoading", false);
-});
+// router.afterEach(() => {
+//   store.dispatch("setPageLoading", false);
+// });
 
 export default router;

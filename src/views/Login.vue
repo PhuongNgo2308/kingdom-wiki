@@ -3,15 +3,19 @@
     <v-card class="py-4 px-5" outlined>
       <v-form ref="form" v-model="valid" class="mt-5">
         <v-row>
+          <v-col md="6" cols="12" class="mx-auto justify-center d-flex">
+            <v-avatar size="45" color="primary lighten-1">
+              <v-icon color="white">mdi-lock</v-icon>
+            </v-avatar>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col md="6" cols="12" class="mx-auto">
             <v-text-field
               v-model="email"
               label="Email"
-              prepend-inner-icon="mdi-email"
               maxlength="50"
               :rules="[rules.email, rules.required]"
-              outlined
-              dense
             ></v-text-field>
           </v-col>
         </v-row>
@@ -20,28 +24,25 @@
             <v-text-field
               v-model="password"
               label="Password"
-              prepend-inner-icon="mdi-key"
               maxlength="16"
               :rules="[rules.min, rules.required]"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append="showPassword = !showPassword"
-              outlined
-              dense
             ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="6" cols="12" class="mx-auto">
+          <v-col md="6" cols="12" class="mx-auto mt-2">
             <v-btn
               class="font-weight-bold"
               color="primary"
               :disabled="!valid"
               :loading="d_isSubmitting"
               @click="onSubmit"
-              plain
               block
-              outlined
+              rounded
+              depressed
             >
               Login
             </v-btn>
@@ -82,11 +83,11 @@ export default Vue.extend({
       d_isSubmitting: false,
     };
   },
-  // mounted(): void {
-  //   setTimeout(() => {
-  //     this.setPageLoading(false);
-  //   }, 500);
-  // },
+  mounted(): void {
+    setTimeout(() => {
+      this.setPageLoading(false);
+    }, 500);
+  },
   methods: {
     onSubmit(): void {
       this.d_isSubmitting = true;
@@ -98,7 +99,7 @@ export default Vue.extend({
         })
         .finally(() => (this.d_isSubmitting = false));
     },
-    ...mapActions(["setUser"]),
+    ...mapActions(["setPageLoading"]),
   },
 });
 </script>
