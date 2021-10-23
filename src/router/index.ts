@@ -15,11 +15,11 @@ export const ROUTES_CONFIG: any = Object.freeze({
     "Login",
     () => import(/* webpackChunkName: "login" */ "@/views/Login.vue"),
   ],
-  REGISTER: [
-    "/reg",
-    "Register",
-    () => import(/* webpackChunkName: "reg" */ "@/views/Register.vue"),
-  ],
+  // REGISTER: [
+  //   "/reg",
+  //   "Register",
+  //   () => import(/* webpackChunkName: "reg" */ "@/views/Register.vue"),
+  // ],
   NEW_POST: [
     "/new-post",
     "NewPost",
@@ -59,17 +59,15 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { uid } = { ...store.getters.uif };
+  const { uid = null } = { ...store.getters.uif };
 
   // next-line: check if route ("to" object) needs authenticated
   if (to.matched.some((record) => record.meta.requiresAuth) && !uid) {
     if ("/login" != from.path) {
-      debugger;
       store.dispatch("setPageLoading", true);
       next({ name: "Login", query: { redirect: to.path } });
     }
   } else if (uid) {
-    debugger;
     store.dispatch("setPageLoading", true);
     switch (to.name) {
       case "Login" || "Register" || "ResetPassword":
@@ -80,7 +78,6 @@ router.beforeEach(async (to, from, next) => {
         break;
     }
   } else {
-    debugger;
     store.dispatch("setPageLoading", true);
     next();
   }

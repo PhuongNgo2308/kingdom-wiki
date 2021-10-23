@@ -14,9 +14,7 @@ export default Vue.extend({
     },
   },
   data() {
-    return {
-      d_content: "" as string,
-    };
+    return {};
   },
   mounted(): void {
     (this.$refs.editor as any)?.$el.setAttribute("spellcheck", false);

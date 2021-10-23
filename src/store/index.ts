@@ -43,7 +43,6 @@ export default new Vuex.Store({
       state.isPageLoading = isLoading;
     },
     SET_USER(state, { uid, uname, role }) {
-      debugger;
       state.uif = {
         uid,
         uname,

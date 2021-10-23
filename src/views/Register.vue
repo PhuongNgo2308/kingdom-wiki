@@ -89,11 +89,9 @@ export default Vue.extend({
     onSubmit(): void {
       authService
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then((data) => {
-          debugger;
-        })
+        .then()
         .catch((err) => {
-          debugger;
+          console.log(err);
         })
         .finally(() => (this.d_isSubmitting = false));
     },

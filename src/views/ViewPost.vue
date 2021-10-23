@@ -15,55 +15,57 @@
         ></TimeString
       ></span>
       <v-spacer></v-spacer>
-      <span v-if="!d_isEditing">
-        <!-- button edit -->
-        <v-btn
-          icon
-          outlined
-          small
-          class="mr-5"
-          color="accent"
-          @click="d_isEditing = true"
-        >
-          <v-icon small>
-            mdi-draw
-          </v-icon>
-        </v-btn>
-        <!-- button delete -->
-        <v-btn icon outlined small color="error">
-          <v-icon small>
-            mdi-delete
-          </v-icon>
-        </v-btn>
-      </span>
-      <!-- edit save -->
-      <span v-if="d_isEditing">
-        <v-btn
-          icon
-          outlined
-          small
-          :loading="d_submitting"
-          @click="onSavePost"
-          color="accent"
-          class="mr-5"
-        >
-          <v-icon small>
-            mdi-content-save
-          </v-icon>
-        </v-btn>
-        <!-- edit cancel -->
-        <v-btn
-          icon
-          outlined
-          small
-          color="decent"
-          @click="d_isEditing = false"
-          v-if="!d_submitting"
-        >
-          <v-icon small>
-            mdi-cancel
-          </v-icon>
-        </v-btn>
+      <span v-if="isLoggedIn">
+        <span v-if="!d_isEditing">
+          <!-- button edit -->
+          <v-btn
+            icon
+            outlined
+            small
+            class="mr-5"
+            color="accent"
+            @click="d_isEditing = true"
+          >
+            <v-icon small>
+              mdi-draw
+            </v-icon>
+          </v-btn>
+          <!-- button delete -->
+          <v-btn icon outlined small color="error">
+            <v-icon small>
+              mdi-delete
+            </v-icon>
+          </v-btn>
+        </span>
+        <!-- edit save -->
+        <span v-if="d_isEditing">
+          <v-btn
+            icon
+            outlined
+            small
+            :loading="d_submitting"
+            @click="onSavePost"
+            color="accent"
+            class="mr-5"
+          >
+            <v-icon small>
+              mdi-content-save
+            </v-icon>
+          </v-btn>
+          <!-- edit cancel -->
+          <v-btn
+            icon
+            outlined
+            small
+            color="decent"
+            @click="d_isEditing = false"
+            v-if="!d_submitting"
+          >
+            <v-icon small>
+              mdi-cancel
+            </v-icon>
+          </v-btn>
+        </span>
       </span>
     </v-row>
     <v-row>
@@ -89,6 +91,7 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
+import { mapActions, mapGetters } from "vuex";
 import { postService } from "@/services/dataServices";
 import Base from "@/common_components/Base.vue";
 import ViewModeEditor from "@/common_components/ViewModeEditor.vue";
@@ -122,8 +125,10 @@ export default Vue.extend({
   },
   computed: {
     TimeStringMode: () => TimeStringMode, //usage for enum
+    ...mapGetters(["isLoggedIn"]),
   },
   methods: {
+    ...mapActions(["setPageLoading"]),
     onContentChanged({ content = "" }): void {
       this.d_editingContent = content;
     },

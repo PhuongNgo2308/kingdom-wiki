@@ -16,12 +16,43 @@
         mdi-login-variant
       </v-icon>
     </v-btn>
-    <v-btn v-if="uname" icon @click="m_logOut" class="mr-2" link>
+    <!-- <v-btn v-if="uname" icon @click="m_logOut" class="mr-2" link>
       {{ uname }}
       <v-icon>
         mdi-logout-variant
       </v-icon>
-    </v-btn>
+    </v-btn> -->
+
+    <v-menu v-if="uname" nudge-bottom="5" rounded="t-xl b-xl" offset-y bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-chip
+          v-if="uname"
+          v-bind="attrs"
+          v-on="on"
+          text-color="primary"
+          class="pl-2"
+          outlined
+        >
+          <v-avatar left size="30px">
+            <v-img src="@/assets/ks_bia.png"></v-img>
+          </v-avatar>
+          <v-icon right>
+            mdi-dots-vertical
+          </v-icon>
+        </v-chip>
+      </template>
+
+      <v-list dense>
+        <v-list-item link @click="m_logOut">
+          <v-list-item-content>
+            <v-list-item-title>Log out</v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 

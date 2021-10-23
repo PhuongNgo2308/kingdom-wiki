@@ -24,6 +24,7 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
+import { mapActions } from "vuex";
 import { postService } from "@/services/dataServices";
 import Base from "@/common_components/Base.vue";
 import Editor, { EditorContentModel } from "@/common_components/Editor.vue";
@@ -47,6 +48,7 @@ export default Vue.extend({
     };
   },
   methods: {
+    ...mapActions(["setPageLoading"]),
     contentChanged({ content = "" }: EditorContentModel): void {
       this.d_content = content;
     },

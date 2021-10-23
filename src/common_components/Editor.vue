@@ -23,9 +23,17 @@ export default Vue.extend({
   components: {
     VueEditor,
   },
-  props: {},
+  props: {
+    content: {
+      type: String,
+      default(): string {
+        return "";
+      },
+    },
+  },
   data() {
     return {
+      d_content: "" as string,
       d_editorOptions: {
         placeholder: "Compose an epic...",
         spellcheck: "false",

@@ -57,12 +57,6 @@ import Vue from "vue";
 import { mapActions } from "vuex";
 import Base from "@/common_components/Base.vue";
 import authService from "@/services/authService";
-import { UserInfoModel } from "@/store";
-
-interface LoginModel {
-  email: string;
-  password?: string;
-}
 
 export default Vue.extend({
   name: "Login",

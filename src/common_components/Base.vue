@@ -37,15 +37,12 @@ export default Vue.extend({
     },
     ...mapGetters(["isPageLoading", "isLoggedIn"]),
   },
-  methods: {
-    ...mapActions(["setPageLoading"]),
-  },
   watch: {
     isLoggedIn(newVal) {
       console.log(`isLoggedIn: ${newVal}`);
       const redirect: any = this.$route.query.redirect || "/";
-      this.$router.replace({ path: redirect }).catch(() => {
-        debugger;
+      this.$router.replace({ path: redirect }).catch((ex) => {
+        console.log(ex);
       });
     },
   },

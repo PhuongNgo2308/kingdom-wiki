@@ -11,7 +11,6 @@ Vue.config.productionTip = false;
 authService.onAuthStateChanged((user) => {
   const { uid, displayName: uname, email } = { ...user };
   const uif: UserInfoModel = { uid, uname, email };
-  debugger;
   store.dispatch("setUser", uif);
 });
 

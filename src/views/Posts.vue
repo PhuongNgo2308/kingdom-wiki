@@ -2,7 +2,7 @@
   <v-container class="posts" :id="d_componentId" v-if="!isPageLoading">
     <v-list three-line>
       <template v-for="(item, index) in d_posts">
-        <v-list-item :key="item.id" link route :to="`/view-post/${item.pid}`">
+        <v-list-item :key="item.id" :to="item.navTo" link route>
           <v-list-item-avatar>
             <v-img src="@/assets/ks_bia.png"></v-img>
           </v-list-item-avatar>
@@ -50,7 +50,10 @@ export default Vue.extend({
       .get()
       .then((querySnapshot) => {
         self.d_posts = querySnapshot.docs.map(function(doc) {
-          return { ...doc.data(), pid: doc.id };
+          return {
+            ...doc.data(),
+            navTo: `/view-post/${doc.id}`,
+          };
         });
         self.setPageLoading(false);
       });
